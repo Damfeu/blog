@@ -1,3 +1,10 @@
+<?php
+if(isset($_COOKIE['username'])){
+    header('Location: /BLOGS');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +21,18 @@
     require_once '../includes/menu.php';
     ?>
     <div class="signin">
-        <form action="">
+        <?php
+            if (isset($_GET['email']) && $_GET['email'] == 'error') {
+                echo "<h2> Email invalide. Veuillez saisir entre 5 et 10 caractères.</h2>";
+
+            }
+            if (isset($_GET['password']) && $_GET['password'] == 'error') {
+                echo "<h2> Les mots de passe saisis ne concordent pas. Veuillez les vérifier.</h2>";
+
+            }
+        ?>
+        <form action="/BLOGS/processing/authentification.php" method="POST">
+
             <label for="username">Adresse email</label>
             <input type="email" name="email" id="email" placeholder="Saisir votre adresse email" required>
 
